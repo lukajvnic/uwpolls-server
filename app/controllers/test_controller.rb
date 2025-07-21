@@ -1,5 +1,6 @@
 class TestController < ApplicationController
     def helloworld
-        render json: {message: "This is a test, Hello World"}
+        name = params[:name]
+        render json: {message:"This is a test, Hello #{name}"}
     end
 end

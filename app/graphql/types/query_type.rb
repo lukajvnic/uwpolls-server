@@ -22,10 +22,17 @@ module Types
     # They will be entry points for queries on your schema.
 
     # TODO: remove me
-    field :testfield_, String, null: false,
+    field :test, String, null: false,
       description: "An example field added by the generator"
-    def testfield_
+    def test
       "Hello World!"
+    end
+
+    field :users, [Types::UserType], null: false,
+      description: "Lists all users"
+
+    def users
+      User.all
     end
   end
 end

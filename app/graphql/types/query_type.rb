@@ -34,5 +34,12 @@ module Types
     def users
       User.all
     end
+    
+    # TODO: Change later so it only load like 20 at a time
+    field :polls, [Types::PollType], null: false
+
+    def polls
+      Poll.all
+end
   end
 end

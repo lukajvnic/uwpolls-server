@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  timeposted: 2025-08-23 13:52:02
+  opt1: MyString
+  opt2: MyString
+  opt3: MyString
+  opt4: MyString
+  res1: 1
+  res2: 1
+  res3: 1
+  res4: 1
+  totalvotes: 1
+
+two:
+  email: MyString
+  timeposted: 2025-08-23 13:52:02
+  opt1: MyString
+  opt2: MyString
+  opt3: MyString
+  opt4: MyString
+  res1: 1
+  res2: 1
+  res3: 1
+  res4: 1
+  totalvotes: 1

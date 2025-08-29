@@ -101,5 +101,4 @@ RSpec.describe "Polls GraphQL API", type: :request do
         expect(poll_data["title"]).to eq("Fav Drink?")
         expect(Poll.find_by(id: poll.id)).to be_nil
       end
-    
 end

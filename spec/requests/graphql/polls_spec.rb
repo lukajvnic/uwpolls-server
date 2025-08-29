@@ -38,4 +38,25 @@ RSpec.describe "Polls GraphQL API", type: :request do
     expect(poll_data["opt1"]).to eq("Ruby")
     expect(poll_data["totalvotes"]).to eq(0)
     end
+
+    it "fetches a poll by id" do
+        poll = Poll.create!(email: "a@b.com", title: "Fav Food?", opt1: "Pizza", opt2: "Burger")
+    
+        query = <<~GQL
+          {
+            poll(id: #{poll.id}) {
+              id
+              title
+              email
+            }
+          }
+        GQL
+    
+        result = graphql_query(query)
+        poll_data = result["data"]["poll"]
+    
+        expect(poll_data["title"]).to eq("Fav Food?")
+        expect(poll_data["email"]).to eq("a@b.com")
+      end
+    
 end

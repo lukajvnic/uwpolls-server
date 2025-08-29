@@ -59,7 +59,7 @@ RSpec.describe "Polls GraphQL API", type: :request do
         expect(poll_data["email"]).to eq("a@b.com")
       end
     
-    it "increments votes for a poll option" do
+    it "votes for a poll option" do
         poll = Poll.create!(email: "a@b.com", title: "Fav Color?", opt1: "Red", opt2: "Blue", res1: 0, res2: 0, totalvotes: 0)
     
         query = <<~GQL
@@ -80,4 +80,26 @@ RSpec.describe "Polls GraphQL API", type: :request do
         expect(poll_data["res1"]).to eq(1)
         expect(poll_data["totalvotes"]).to eq(1)
       end
+
+      it "deletes poll" do
+        poll = Poll.create!(email: "a@b.com", title: "Fav Drink?", opt1: "Tea", opt2: "Coffee")
+    
+        query = <<~GQL
+          mutation {
+            deletePoll(pollId: #{poll.id}) {
+              poll {
+                id
+                title
+              }
+            }
+          }
+        GQL
+    
+        result = graphql_query(query)
+        poll_data = result["data"]["deletePoll"]["poll"]
+    
+        expect(poll_data["title"]).to eq("Fav Drink?")
+        expect(Poll.find_by(id: poll.id)).to be_nil
+      end
+    
 end

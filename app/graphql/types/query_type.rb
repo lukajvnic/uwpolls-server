@@ -36,10 +36,13 @@ module Types
     end
     
     # TODO: Change later so it only load like 20 at a time
-    field :polls, [Types::PollType], null: false
-
-    def polls
-      Poll.all
-end
+    field :poll, Types::PollType, null: true do
+      description "Find a poll based on id"
+      argument :id, ID, required: true
+    end
+    
+    def poll(id:)
+      Poll.find_by(id: id)
+    end    
   end
 end

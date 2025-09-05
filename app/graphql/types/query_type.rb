@@ -41,6 +41,12 @@ module Types
       argument :id, ID, required: true
     end
     
+    field :polls, [Types::PollType], null: false,
+      description: "list all polls"
+    def polls 
+      Poll.all
+    end
+    
     def poll(id:)
       Poll.find_by(id: id)
     end    

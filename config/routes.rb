@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/test/:name", to: "test#helloworld"
+
+  post "/poll/createpoll", to: "poll#create_poll"
 end

@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get "/test/:name", to: "test#helloworld"
 
   post "/poll/createpoll", to: "poll#create_poll"
+  post "/poll/votepoll", to: "poll#vote_poll"
 end

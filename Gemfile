@@ -17,6 +17,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+
+gem 'rack-cors'
 #database
 gem "graphql"
 gem "graphiql-rails", group: :development

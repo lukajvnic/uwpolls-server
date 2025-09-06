@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   post "/poll/createpoll", to: "poll#create_poll"
   post "/poll/votepoll", to: "poll#vote_poll"
   get "/poll/random", to: "poll#get_random_poll"
+  get "/poll/recent", to: "poll#get_recent_polls"
+  
 end

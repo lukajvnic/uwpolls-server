@@ -1,6 +1,19 @@
 class PollController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def get_random_poll
+    poll = Poll.order("RANDOM()").first
+    render json: {
+      id: poll.id,
+      title: poll.title,
+      opt1: poll.opt1,
+      opt2: poll.opt2,
+      opt3: poll.opt3,
+      opt4: poll.opt4,
+      total_votes: poll.totalvotes
+    }
+  end
+
   def vote_poll
     variables = params.permit(:pollId, :optionNumber).to_h
     query = <<~GQL

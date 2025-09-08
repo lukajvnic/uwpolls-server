@@ -18,8 +18,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 
-gem 'rack-cors'
-#database
+gem "rack-cors"
+# database
 gem "graphql"
 gem "graphiql-rails", group: :development
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
@@ -68,5 +68,5 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem "rspec-rails"
 end

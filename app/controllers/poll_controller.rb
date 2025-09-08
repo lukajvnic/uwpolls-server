@@ -58,6 +58,17 @@ class PollController < ApplicationController
     }
   end
 
+  def delete_poll
+    variables = params.permit(:pollId).to_h
+    query = <<~GQL
+      mutation($pollId: ID!) {
+        deletePoll(pollId: $pollId) {}
+      }
+    GQL
+    result = MyAppSchema.execute(query, variables: variables)
+    render json: result
+  end
+
   def vote_poll
     variables = params.permit(:pollId, :optionNumber).to_h
     query = <<~GQL

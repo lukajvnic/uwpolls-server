@@ -58,6 +58,28 @@ class PollController < ApplicationController
     }
   end
 
+  def search_polls
+    query_param = params[:query] || ""
+    page = (params[:page] || 1).to_i
+    per_page = 20
+    polls = Poll.where("title ILIKE ?", "%#{query_param}%").order(created_at: :desc).offset((page - 1) * per_page).limit(per_page + 1)
+    render json: {
+      page: page,
+      has_more: polls.size > per_page,
+      polls: polls.first(per_page).map { |poll|
+        {
+          id: poll.id,
+          title: poll.title,
+          opt1: poll.opt1,
+          opt2: poll.opt2,
+          opt3: poll.opt3,
+          opt4: poll.opt4,
+          total_votes: poll.totalvotes
+        }
+      }
+    }
+  end
+
   def delete_poll
     variables = params.permit(:pollId).to_h
     query = <<~GQL

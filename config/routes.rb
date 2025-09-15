@@ -24,5 +24,6 @@ Rails.application.routes.draw do
   get "/poll/random", to: "poll#get_random_poll"
   get "/poll/recent", to: "poll#get_recent_polls"
   get "/poll/popular", to: "poll#get_popular_polls"
+  get "/poll/trending", to: "poll#get_trending_polls"
   
 end

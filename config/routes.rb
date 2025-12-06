@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   post "/poll/createpoll", to: "poll#create_poll"
   post "/poll/votepoll", to: "poll#vote_poll"
+  get "poll/search", to: "poll#search_polls"
   post "/poll/deletepoll", to: "poll#delete_poll"
   get "/poll/random", to: "poll#get_random_poll"
   get "/poll/recent", to: "poll#get_recent_polls"
@@ -29,5 +30,6 @@ Rails.application.routes.draw do
   post "/auth/login", to: "auth#email_login"
   post "/auth/signup", to: "auth#email_signup"
   post "/auth/logout", to: "auth#logout"
+  get "/poll/trending", to: "poll#get_trending_polls"
   
 end

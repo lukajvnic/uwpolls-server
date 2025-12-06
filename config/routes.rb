@@ -23,5 +23,11 @@ Rails.application.routes.draw do
   get "/poll/random", to: "poll#get_random_poll"
   get "/poll/recent", to: "poll#get_recent_polls"
   get "/poll/popular", to: "poll#get_popular_polls"
+  get "/poll/:id/peek", to: "poll#peek_poll"
+
+  get "/auth/health", to: "auth#health"
+  post "/auth/login", to: "auth#email_login"
+  post "/auth/signup", to: "auth#email_signup"
+  post "/auth/logout", to: "auth#logout"
   
 end

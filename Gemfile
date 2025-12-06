@@ -23,7 +23,13 @@ gem "rack-cors"
 gem "graphql"
 gem "graphiql-rails", group: :development
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
+
+# JWT for session tokens and Google OAuth verification
+gem "jwt", "~> 2.8"
+
+# HTTP client for token verification
+gem "httpclient", "~> 2.8"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]

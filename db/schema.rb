@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_06_061300) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_07_030616) do
   create_table "polls", force: :cascade do |t|
     t.string "email"
     t.string "title"
@@ -28,6 +28,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_06_061300) do
     t.datetime "updated_at", null: false
     t.text "voted_emails", default: ""
     t.text "user_votes", default: "{}"
+    t.boolean "allow_peek_results", default: true
   end
 
   create_table "users", force: :cascade do |t|

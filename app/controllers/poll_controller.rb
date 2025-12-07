@@ -87,6 +87,86 @@ class PollController < ApplicationController
     }
   end
 
+  def get_new_polls
+    page = (params[:page] || 1).to_i
+    per_page = 20
+    
+    user_email = session[:user_id] ? User.find_by(id: session[:user_id])&.email : nil
+    
+    # Get all polls ordered by created_at, then filter out voted ones
+    all_polls = Poll.order(created_at: :desc)
+    
+    # Filter out polls the user has voted on
+    if user_email
+      unvoted_polls = all_polls.select do |poll|
+        user_votes = JSON.parse(poll.user_votes.to_s.presence || "{}")
+        !user_votes.key?(user_email)
+      end
+    else
+      unvoted_polls = all_polls.to_a
+    end
+    
+    # Paginate the filtered results
+    paginated_polls = unvoted_polls.drop((page - 1) * per_page).take(per_page + 1)
+    
+    render json: {
+      page: page,
+      has_more: paginated_polls.size > per_page,
+      polls: paginated_polls.first(per_page).map { |poll|
+        {
+          id: poll.id,
+          title: poll.title,
+          opt1: poll.opt1,
+          opt2: poll.opt2,
+          opt3: poll.opt3,
+          opt4: poll.opt4,
+          res1: poll.res1,
+          res2: poll.res2,
+          res3: poll.res3,
+          res4: poll.res4,
+          total_votes: poll.totalvotes,
+          user_has_voted: false,
+          user_voted_option: nil
+        }
+      }
+    }
+  end
+
+  def get_my_polls
+    user = User.find_by(id: session[:user_id])
+    unless user
+      return render json: { error: "Not authenticated", polls: [], has_more: false }, status: :ok
+    end
+
+    page = (params[:page] || 1).to_i
+    per_page = 20
+    polls = Poll.where(email: user.email).order(created_at: :desc).offset((page - 1) * per_page).limit(per_page + 1)
+    
+    render json: {
+      page: page,
+      has_more: polls.size > per_page,
+      polls: polls.first(per_page).map { |poll|
+        user_votes = JSON.parse(poll.user_votes.to_s.presence || "{}")
+        user_voted_option = user_votes[user.email]
+        {
+          id: poll.id,
+          title: poll.title,
+          opt1: poll.opt1,
+          opt2: poll.opt2,
+          opt3: poll.opt3,
+          opt4: poll.opt4,
+          res1: poll.res1,
+          res2: poll.res2,
+          res3: poll.res3,
+          res4: poll.res4,
+          total_votes: poll.totalvotes,
+          user_has_voted: user_voted_option.present?,
+          user_voted_option: user_voted_option
+        }
+      }
+    }
+  end
+
   def get_random_poll
     poll = Poll.order("RANDOM()").first
     render json: {

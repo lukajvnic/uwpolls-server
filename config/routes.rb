@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post "/poll/deletepoll", to: "poll#delete_poll"
   get "/poll/random", to: "poll#get_random_poll"
   get "/poll/recent", to: "poll#get_recent_polls"
+  get "/poll/new", to: "poll#get_new_polls"
+  get "/poll/mypolls", to: "poll#get_my_polls"
   get "/poll/popular", to: "poll#get_popular_polls"
   get "/poll/:id/peek", to: "poll#peek_poll"
 

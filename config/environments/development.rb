@@ -72,4 +72,7 @@ Rails.application.configure do
 
   # Google OAuth Configuration
   ENV["GOOGLE_CLIENT_ID"] ||= "YOUR_GOOGLE_CLIENT_ID_HERE"
+
+  # Allow ngrok host for remote access
+  config.hosts << "unmutative-countercurrently-leopoldo.ngrok-free.dev"
 end

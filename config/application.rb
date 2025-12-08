@@ -25,13 +25,7 @@ module MyApp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    # Enable CORS for frontend development
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins "localhost:5000", "localhost:5173", "localhost:3000", "127.0.0.1:5000", "127.0.0.1:5173"
-        resource "*", headers: :any, methods: [:get, :post, :put, :patch, :delete, :options], credentials: true
-      end
-    end
+    # CORS configuration is handled in config/initializers/cors.rb
 
     # Configuration for the application, engines, and railties goes here.
     #

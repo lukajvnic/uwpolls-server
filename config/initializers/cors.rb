@@ -4,7 +4,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
             "127.0.0.1:5000", "127.0.0.1:5173", "127.0.0.1:3000", "127.0.0.1:5431",
             "https://unmutative-countercurrently-leopoldo.ngrok-free.dev",
             "https://uwpolls-client.vercel.app",
-            "https://uwpolls-client-j22rje4rd-lukas-projects-e2762843.vercel.app"
+            "uwpolls-client-j74yipxp3-lukas-projects-e2762843.vercel.app"
     resource "*",
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head],
